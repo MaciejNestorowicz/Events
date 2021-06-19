@@ -13,7 +13,7 @@ import java.util.logging.Logger;
 
 public class EventFileParser {
     private static final Logger logger = Logger.getLogger(EventFileParser.class.getName());
-    public static List<Event> parseEventFile(String path) {
+    public List<Event> parseEventFile(String path) {
         logger.info("Parsing file");
         EventParser eventParser = new EventParser();
         try (BufferedReader reader = Files.newBufferedReader(Path.of(path), StandardCharsets.UTF_8)) {

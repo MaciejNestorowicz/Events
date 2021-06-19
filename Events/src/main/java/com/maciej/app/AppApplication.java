@@ -8,6 +8,6 @@ public class AppApplication {
 		Scanner scanner = new Scanner(System.in);
 		String path = scanner.nextLine();
 		DatabaseConnector databaseConnector = new DatabaseConnector();
-		databaseConnector.handleEvents(EventFileParser.parseEventFile(path));
+		databaseConnector.handleEvents(new EventFileParser().parseEventFile(path));
 	}
 }

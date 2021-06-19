@@ -1,5 +1,7 @@
 package com.maciej.app;
 
+import java.util.Objects;
+
 public class Event {
     String id;
     int duration;
@@ -39,5 +41,17 @@ public class Event {
 
     public boolean isAlert() {
         return alert;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Event event = (Event) o;
+        return duration == event.duration &&
+                alert == event.alert &&
+                Objects.equals(id, event.id) &&
+                Objects.equals(type, event.type) &&
+                Objects.equals(host, event.host);
     }
 }

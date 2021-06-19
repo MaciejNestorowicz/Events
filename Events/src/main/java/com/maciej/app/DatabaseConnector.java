@@ -15,8 +15,6 @@ public class DatabaseConnector {
                 ResultSet res = dbm.getTables(null, null, "EVENTS", null);
                 Statement statement = con.createStatement();
 
-                //statement.executeUpdate("DROP TABLE events");
-
                 if (!res.next()) createTable(statement);
                 insertEvents(statement, events);
             }

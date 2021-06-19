@@ -11,18 +11,18 @@ import java.util.logging.Logger;
 public class EventParser {
     private final Logger logger = Logger.getLogger(EventParser.class.getName());
     private final List<Event> events = new ArrayList<>();
-    private final Map<String, JsonNode> map = new HashMap<>();
+    private final Map<String, JsonNode> eventMap = new HashMap<>();
 
     public void parse(JsonNode jsonNode) {
         String id = jsonNode.get("id").asText();
         logger.info("Parsing Event of ID " + id);
-        if (map.isEmpty()) map.put(jsonNode.get("id").asText(), jsonNode);
+        if (eventMap.isEmpty()) eventMap.put(jsonNode.get("id").asText(), jsonNode);
         else {
-            if (map.containsKey(id)) {
-                events.add(eventBuilder(map.get(id), jsonNode));
-                map.remove(id);
+            if (eventMap.containsKey(id)) {
+                events.add(eventBuilder(eventMap.get(id), jsonNode));
+                eventMap.remove(id);
             } else {
-                map.put(id, jsonNode);
+                eventMap.put(id, jsonNode);
             }
         }
     }
