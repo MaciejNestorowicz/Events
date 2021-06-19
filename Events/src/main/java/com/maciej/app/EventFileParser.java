@@ -9,19 +9,20 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
+import java.util.logging.Logger;
 
 public class EventFileParser {
-    public List<Event> parseEventFile(String path) {
+    private static final Logger logger = Logger.getLogger(EventFileParser.class.getName());
+    public static List<Event> parseEventFile(String path) {
+        logger.info("Parsing file");
         EventParser eventParser = new EventParser();
         try (BufferedReader reader = Files.newBufferedReader(Path.of(path), StandardCharsets.UTF_8)) {
             reader.lines().forEach(json -> {
                 try {
                     ObjectMapper objectMapper = new ObjectMapper();
                     JsonNode jsonNode = objectMapper.readTree(json);
-
                     eventParser.parse(jsonNode);
-
-                } catch (Exception e) {
+                } catch (IOException e) {
                     e.printStackTrace();
                 }
             });

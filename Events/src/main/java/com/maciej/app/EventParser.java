@@ -6,13 +6,16 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Logger;
 
 public class EventParser {
+    private final Logger logger = Logger.getLogger(EventParser.class.getName());
     private final List<Event> events = new ArrayList<>();
     private final Map<String, JsonNode> map = new HashMap<>();
 
     public void parse(JsonNode jsonNode) {
         String id = jsonNode.get("id").asText();
+        logger.info("Parsing Event of ID " + id);
         if (map.isEmpty()) map.put(jsonNode.get("id").asText(), jsonNode);
         else {
             if (map.containsKey(id)) {
@@ -28,7 +31,6 @@ public class EventParser {
         String id = jsonNode1.get("id").asText();
         int duration = getEventDuration(jsonNode1, jsonNode2);
         boolean alert = duration > 4;
-
         if (!jsonNode1.has("type") && !jsonNode1.has("host")) return new Event(id, duration, alert);
         else return new Event(id, duration, jsonNode1.get("type").asText(), jsonNode1.get("host").asText(), alert);
     }
@@ -40,6 +42,7 @@ public class EventParser {
     }
 
     public List<Event> getEvents() {
+        logger.info("Parsed " + events.size() + " events");
         return events;
     }
 }

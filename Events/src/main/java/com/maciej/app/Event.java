@@ -21,14 +21,23 @@ public class Event {
         this.alert = alert;
     }
 
-    @Override
-    public String toString() {
-        return "Event{" +
-                "id='" + id + '\'' +
-                ", duration=" + duration +
-                ", type='" + type + '\'' +
-                ", host='" + host + '\'' +
-                ", alert=" + alert +
-                '}';
+    public String getId() {
+        return id;
+    }
+
+    public int getDuration() {
+        return duration;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public String getHost() {
+        return host;
+    }
+
+    public boolean isAlert() {
+        return alert;
     }
 }
